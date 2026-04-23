@@ -1,0 +1,23 @@
+
+/* ─── Blur Reveal Transition ─── */
+.blur-reveal {
+  filter: blur(25px);
+  opacity: 0;
+  transform: scale(0.95);
+  will-change: filter, opacity, transform;
+}
+
+@keyframes gradient-x {
+  0%, 100% {
+    background-size: 200% 200%;
+    background-position: left center;
+  }
+  50% {
+    background-size: 200% 200%;
+    background-position: right center;
+  }
+}
+
+.animate-gradient-x {
+  animation: gradient-x 15s ease infinite;
+}
