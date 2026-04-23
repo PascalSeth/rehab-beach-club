@@ -1,9 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "@/lib/utils";
+import { cn, useIsomorphicLayoutEffect } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,7 +48,7 @@ export const AreaMap = () => {
   const detailRef = useRef<HTMLDivElement>(null);
   const waveRef = useRef<SVGSVGElement>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     let ctx = gsap.context(() => {
       // 1. Entrance Animation
       gsap.from(".map-header", {

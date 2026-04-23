@@ -10,7 +10,7 @@ import { HeroSequence } from "./HeroSequence";
 gsap.registerPlugin(ScrollTrigger);
 
 export const Hero = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const scopeRef = useRef<HTMLDivElement>(null);
   const phase1Ref = useRef<HTMLDivElement>(null);
   const phase2Ref = useRef<HTMLDivElement>(null);
 
@@ -49,13 +49,14 @@ export const Hero = () => {
       tl.to(".hero-vignette", { opacity: 0, duration: 5, ease: "none" }, 5);
       tl.to(".hero-center-logo", { opacity: 0, scale: 1.15, filter: "blur(10px)", duration: 3, ease: "power2.in" }, 0);
 
-    }, containerRef);
+    }, scopeRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <HeroSequence className="hero-sequence-container">
+    <div ref={scopeRef} className="relative w-full h-full">
+      <HeroSequence className="hero-sequence-container">
       {/* ─── SUBSURFACE BRANDING - Extreme subtlety ─── */}
       <div
         className="absolute inset-0 z-0 opacity-[0.05] pointer-events-none grayscale"
@@ -99,7 +100,7 @@ export const Hero = () => {
       </div>
 
       {/* ─── NARRATIVE CONTAINER ─── */}
-      <div ref={containerRef} className="relative z-20 w-full h-full pointer-events-none overflow-hidden">
+      <div className="relative z-20 w-full h-full pointer-events-none overflow-hidden">
 
         {/* Phase 1: Escape the Ordinary (Top-Left Corner) */}
         <div ref={phase1Ref} className="absolute top-[25%] left-[5%] md:left-[8%] text-left px-4 md:px-0">
@@ -135,5 +136,6 @@ export const Hero = () => {
         <div className="w-px h-10 md:h-14 bg-gradient-to-b from-accent/50 to-transparent animate-pulse" />
       </div>
     </HeroSequence>
+    </div>
   );
 };

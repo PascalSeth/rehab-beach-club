@@ -3,7 +3,7 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { cn } from "@/lib/utils";
+import { cn, useIsomorphicLayoutEffect } from "@/lib/utils";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -49,7 +49,7 @@ const portals = [
 export const ExperiencePortal = () => {
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useLayoutEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     let ctx = gsap.context(() => {
       // 1. Wave Line Animation
       gsap.fromTo(".shore-line",
